@@ -25,11 +25,11 @@ namespace Ratam
                     {
                         continue;
                     }
-                    if (r == t || t == m | r == m)
+                    if (r == t || r == a1 || r == m || a1 == t || a1 == m || t == a2 || t == m || a2 == m)
                     {
                         continue;
                     }
-                    for (int j = 100; i < 999; j++)
+                    for (int j = 100; j < 999; j++)
                     {
                         var r2 = j / 100;
                         var a3 = (j % 100) / 10;
@@ -42,9 +42,24 @@ namespace Ratam
                         var sum = i + j;
 
                         var set1 = new HashSet<int> { r, a1, t, m, d };
+                        var u = sum / 10000;
+                        var l = sum % 10000 / 1000;
+                        var o = sum % 1000 / 100;
+                        var h = sum % 100 / 10;
+                        var y = sum % 10;
 
-                        var set2 = new HashSet<int> { sum / 10000, sum % 10000 / 1000, sum % 1000 / 100, sum % 100 / 10, sum % 10 };
+                        if (u == l || u == o || u == h || u == y || l == o || l == h || l == y || o == h || o == y || h == y)
+                        {
+                            continue;
+                        }
 
+                        var set2 = new HashSet<int> { u, l, o, h, y };
+                        if (!set1.Intersect(set2).Any())
+                        {
+                            Console.Write($"{r}{a1}{t}{a2}{m}");
+                            Console.Write($" + {r}{a1}{d}");
+                            Console.WriteLine($" = {u}{l}{o}{h}{y}");
+                        }
                     }
                 }
             }
